@@ -19,7 +19,11 @@ exports.handler = function (event, context, callback) {
     }
   })
   console.log(unfurls)
-  slack.chat.unfurl(slackEvent.message_ts, slackEvent.channel, unfurls)
+  slack.chat.unfurl({
+    ts: slackEvent.message_ts,
+    channel: slackEvent.channel,
+    unfurls: unfurls,
+  })
 
   callback(null, {
     statusCode: 200,
