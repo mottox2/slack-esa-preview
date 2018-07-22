@@ -28,7 +28,8 @@ exports.handler = async function (event, context, callback) {
   let unfurls = {}
   for (let i = 0; i < urls.length; i++) {
     const post = await getEsaPost(url)
-    console.log(post.name) unfurls[url] = {
+    console.log(post.name)
+    unfurls[url] = {
       "text": post.name
     }
   }
