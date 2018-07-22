@@ -16,7 +16,7 @@ async function getEsaPost(url) {
   return res
 }
 
-exports.handler = function (event, context, callback) {
+exports.handler = async function (event, context, callback) {
   // console.log(JSON.stringify(event.body))
   const body = JSON.parse(event.body)
   const slackEvent = body.event
@@ -26,13 +26,12 @@ exports.handler = function (event, context, callback) {
 
   const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN);
   let unfurls = {}
-  urls.map(async function (url) {
+  for (let i = 0; i < urls.length; i++) {
     const post = await getEsaPost(url)
-    console.log(post)
-    unfurls[url] = {
+    console.log(post.name) unfurls[url] = {
       "text": post.name
     }
-  })
+  }
   slack.chat.unfurl({
     ts: slackEvent.message_ts,
     channel: slackEvent.channel,
