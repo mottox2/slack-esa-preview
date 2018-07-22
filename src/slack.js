@@ -18,6 +18,7 @@ exports.handler = function (event, context, callback) {
       "text": "Every day is the test."
     }
   })
+  console.log(unfurls)
   slack.chat.unfurl(slackEvent.message_ts, slackEvent.channel, unfurls)
 
   callback(null, {
