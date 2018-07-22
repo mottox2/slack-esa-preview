@@ -28,6 +28,7 @@ exports.handler = function (event, context, callback) {
   let unfurls = {}
   urls.map(async function (url) {
     const post = await getEsaPost(url)
+    console.log(post)
     unfurls[url] = {
       "text": post.name
     }
@@ -37,6 +38,7 @@ exports.handler = function (event, context, callback) {
     channel: slackEvent.channel,
     unfurls: unfurls,
   })
+  console.log(unfurls)
 
   callback(null, {
     statusCode: 200,
