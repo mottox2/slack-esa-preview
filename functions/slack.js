@@ -5,8 +5,8 @@ const {
 exports.handler = function (event, context, callback) {
   console.log(JSON.stringify(event.body))
   const body = JSON.parse(event.body)
-  const event = body.event
-  const urls = event.links.map(function (link) {
+  const slackEvent = body.event
+  const urls = slackEvent.links.map(function (link) {
     return link.url
   })
 
@@ -17,7 +17,7 @@ exports.handler = function (event, context, callback) {
       "text": "Every day is the test."
     }
   })
-  slack.chat.unfurl(event.message_ts, event.channel, unfurls)
+  slack.chat.unfurl(slackEvent.message_ts, slackEvent.channel, unfurls)
 
   callback(null, {
     statusCode: 200,
