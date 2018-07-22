@@ -4,6 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@slack/client": "^4.3.1"
+    "@slack/client": "^4.3.1",
+    "netlify-lambda": "^0.4.0"
+  },
+  "scripts": {
+    "build": "netlify-lambda build src/",
+    "serve": "netlify-lambda serve src/"
   }
 }
