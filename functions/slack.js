@@ -9,6 +9,7 @@ exports.handler = function (event, context, callback) {
   const urls = slackEvent.links.map(function (link) {
     return link.url
   })
+  console.log(urls)
 
   const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN);
   let unfurls = {}
