@@ -14,7 +14,7 @@ exports.handler = function (event, context, callback) {
   const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN);
   let unfurls = {}
   urls.map(function (url) {
-    unfurl[url] = {
+    unfurls[url] = {
       "text": "Every day is the test."
     }
   })
