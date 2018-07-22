@@ -27,6 +27,7 @@ exports.handler = async function (event, context, callback) {
   const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN);
   let unfurls = {}
   for (let i = 0; i < urls.length; i++) {
+    const url = urls[i]
     const post = await getEsaPost(url)
     console.log(post.name)
     unfurls[url] = {
