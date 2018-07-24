@@ -9,9 +9,7 @@
     "node-esa": "tanatana/node-esa"
   },
   "scripts": {
-    "build": "netlify-lambda build src/",
-    "serve": "netlify-lambda serve src/",
-    "b": "babel src/"
+    "build": "webpack ./src/slack.js functions/bundle.js --module-bind js=babel-loader --target='node' --mode='development'"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.54",
