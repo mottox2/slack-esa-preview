@@ -20,16 +20,13 @@ exports.handler = async function (event, context, callback) {
   // console.log(JSON.stringify(event.body))
   const body = JSON.parse(event.body)
   const slackEvent = body.event
-  const urls = slackEvent.links.map(function (link) {
-    return link.url
-  })
+  const urls = slackEvent.links.map(link => link.url)
 
   const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN);
   let unfurls = {}
   for (let i = 0; i < urls.length; i++) {
     const url = urls[i]
     const post = await getEsaPost(url)
-    console.log(post.name)
     unfurls[url] = {
       "text": post.name
     }
