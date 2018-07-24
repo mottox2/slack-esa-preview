@@ -5,7 +5,6 @@
   "license": "MIT",
   "dependencies": {
     "@slack/client": "^4.3.1",
-    "babel-loader": "^8.0.0-beta",
     "node-esa": "tanatana/node-esa"
   },
   "scripts": {
@@ -20,6 +19,9 @@
     "@babel/preset-typescript": "^7.0.0-beta.54",
     "typescript": "^2.9.2",
     "webpack": "^4.16.2",
-    "webpack-cli": "^3.1.0"
+    "webpack-cli": "^3.1.0",
+    "babel-loader": "^8.0.0-beta",
+    "cls-bluebird": "^2.1.0",
+    "electron": "^2.0.5"
   }
 }
