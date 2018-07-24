@@ -28,7 +28,9 @@ exports.handler = async function (event, context, callback) {
     const url = urls[i]
     const post = await getEsaPost(url)
     unfurls[url] = {
-      "text": post.name
+      "author_name": post.updated_by.name,
+      "color": "#0a9b94",
+      "title": post.name
     }
   }
   slack.chat.unfurl({
