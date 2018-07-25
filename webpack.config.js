@@ -1,5 +1,5 @@
 exports.default = {
-  mode: 'production',
+  mode: 'development',
   target: 'node',
   entry: {
     slack: './src/slack.js'
