@@ -16,6 +16,7 @@ async function getEsaPost(url: string) {
   return res
 }
 
+// https://api.slack.com/events/link_shared
 interface LinkSharedEvent {
   type: 'link_shared'
   channel: string
