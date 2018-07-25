@@ -29,6 +29,12 @@ interface LinkSharedEvent {
 
 exports.handler = async function (event: any, context: any, callback: any) {
   // console.log(JSON.stringify(event.body))
+  if (!event.body) {
+    callback(null, {
+      statusCode: 200,
+      body: "Check your body"
+    });
+  }
   const body = JSON.parse(event.body)
   const slackEvent : LinkSharedEvent = body.event
   const urls = slackEvent.links.map(link => link.url)
