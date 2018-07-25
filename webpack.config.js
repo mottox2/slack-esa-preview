@@ -1,4 +1,9 @@
 exports.default = {
+  mode: 'production',
+  target: 'node',
+  entry: {
+    slack: './src/slack.js'
+  },
   module: {
     rules: [
       {
@@ -10,10 +15,9 @@ exports.default = {
       }
     ]
   },
-  entry: {},
   target: "node",
   output: {
-    path: "functions/",
+    path: __dirname + "/functions/",
     filename: "[name].js",
     libraryTarget: "commonjs"
   },
