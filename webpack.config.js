@@ -2,12 +2,12 @@ exports.default = {
   mode: 'production',
   target: 'node',
   entry: {
-    slack: './src/slack.js'
+    slack: './src/slack.ts'
   },
   module: {
     rules: [
       {
-        test: /\.js?$/,
+        test: /\.ts?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
