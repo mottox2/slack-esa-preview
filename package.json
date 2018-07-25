@@ -5,11 +5,21 @@
   "license": "MIT",
   "dependencies": {
     "@slack/client": "^4.3.1",
-    "netlify-lambda": "^0.4.0",
     "node-esa": "tanatana/node-esa"
   },
   "scripts": {
-    "build": "netlify-lambda build src/",
-    "serve": "netlify-lambda serve src/"
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.54",
+    "@babel/core": "^7.0.0-beta.54",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.54",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.54",
+    "@babel/preset-env": "^7.0.0-beta.54",
+    "babel-loader": "^8.0.0-beta",
+    "cls-bluebird": "^2.1.0",
+    "electron": "^2.0.5",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0"
   }
 }
