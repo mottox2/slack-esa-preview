@@ -3,7 +3,7 @@ const {
 } = require('@slack/client');
 const Esa = require('node-esa').Esa;
 
-async function getEsaPost(url) {
+async function getEsaPost(url: string) {
   // ["posts/1234", "1234"]
   const matched = url.match(/posts\/(\d+)/)
   if (!matched) {
@@ -16,14 +16,24 @@ async function getEsaPost(url) {
   return res
 }
 
-exports.handler = async function (event, context, callback) {
+interface LinkSharedEvent {
+  type: 'link_shared'
+  channel: string
+  message_ts: string
+  links: Array<{
+    domain: string
+    url: string
+  }>
+}
+
+exports.handler = async function (event: any, context: any, callback: any) {
   // console.log(JSON.stringify(event.body))
   const body = JSON.parse(event.body)
-  const slackEvent = body.event
+  const slackEvent : LinkSharedEvent = body.event
   const urls = slackEvent.links.map(link => link.url)
 
   const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN);
-  let unfurls = {}
+  let unfurls: any = {}
   for (let i = 0; i < urls.length; i++) {
     const url = urls[i]
     const post = await getEsaPost(url)
