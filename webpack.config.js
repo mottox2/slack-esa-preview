@@ -1,5 +1,5 @@
 exports.default = {
-  mode: 'development',
+  mode: 'production',
   target: 'node',
   entry: {
     slack: './src/slack.js'
@@ -16,6 +16,10 @@ exports.default = {
     ]
   },
   target: "node",
+  optimization: {
+    // TODO: Minimize a code.
+    minimize: false
+  },
   output: {
     path: __dirname + "/functions/",
     filename: "[name].js",
