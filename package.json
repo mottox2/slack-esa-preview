@@ -6,7 +6,7 @@
   "dependencies": {
     "@babel/preset-typescript": "^7.0.0-beta.54",
     "@slack/client": "^4.3.1",
-    "node-esa": "tanatana/node-esa"
+    "esa-node": "^0.1.2"
   },
   "scripts": {
     "build": "webpack"

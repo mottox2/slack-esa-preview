@@ -1,7 +1,13 @@
-const {
-  WebClient
-} = require('@slack/client');
-const Esa = require('node-esa').Esa;
+import { WebClient } from '@slack/client';
+import Esa from 'esa-node'
+
+declare var process : {
+  env: {
+    SLACK_CLIENT_TOKEN: string
+    ESA_TOKEN: string
+    ESA_TEAM_NAME: string
+  }
+}
 
 async function getEsaPost(url: string) {
   // ["posts/1234", "1234"]
@@ -12,7 +18,7 @@ async function getEsaPost(url: string) {
   const number = matched[1]
   const esa = new Esa(process.env.ESA_TEAM_NAME, process.env.ESA_TOKEN);
 
-  const res = await esa.teams.post(number)
+  const res = await esa.post(number)
   return res
 }
 
@@ -44,12 +50,14 @@ exports.handler = async function (event: any, context: any, callback: any) {
   for (let i = 0; i < urls.length; i++) {
     const url = urls[i]
     const post = await getEsaPost(url)
-    unfurls[url] = {
-      "author_name": post.created_by.name,
-      "author_icon": post.created_by.icon,
-      "color": "#0a9b94",
-      "title": post.name,
-      "title_link": post.url
+    if (post) {
+      unfurls[url] = {
+        "author_name": post.created_by.name,
+        "author_icon": post.created_by.icon,
+        "color": "#0a9b94",
+        "title": post.name,
+        "title_link": post.url,
+      }
     }
   }
   slack.chat.unfurl({
