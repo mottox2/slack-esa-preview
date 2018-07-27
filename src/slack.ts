@@ -16,7 +16,7 @@ function getEsaPost(url: string) {
     return null
   }
   const number = matched[1]
-  const esa = new Esa(process.env.ESA_TEAM_NAME, process.env.ESA_TOKEN);
+  const esa = new Esa(process.env.ESA_TOKEN, process.env.ESA_TEAM_NAME);
   return esa.post(number)
 }
 
