@@ -9,7 +9,7 @@ declare var process : {
   }
 }
 
-async function getEsaPost(url: string) {
+function getEsaPost(url: string) {
   // ["posts/1234", "1234"]
   const matched = url.match(/posts\/(\d+)/)
   if (!matched) {
@@ -17,9 +17,7 @@ async function getEsaPost(url: string) {
   }
   const number = matched[1]
   const esa = new Esa(process.env.ESA_TEAM_NAME, process.env.ESA_TOKEN);
-
-  const res = await esa.post(number)
-  return res
+  return esa.post(number)
 }
 
 // https://api.slack.com/events/link_shared
