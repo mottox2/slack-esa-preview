@@ -48,14 +48,14 @@ exports.handler = async function (event: any, context: any, callback: any) {
   for (let i = 0; i < urls.length; i++) {
     const url = urls[i]
     const post = await getEsaPost(url)
-    if (post) {
-      unfurls[url] = {
-        "author_name": post.created_by.name,
-        "author_icon": post.created_by.icon,
-        "color": "#0a9b94",
-        "title": post.name,
-        "title_link": post.url,
-      }
+    if (!post) { continue }
+    unfurls[url] = {
+      "author_name": post.created_by.name,
+      "author_icon": post.created_by.icon,
+      "color": "#0a9b94",
+      "title": [post.category, post.name].join('/'),
+      "text": post.body_md,
+      "title_link": post.url,
     }
   }
   slack.chat.unfurl({
