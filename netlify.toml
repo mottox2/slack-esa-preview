@@ -2,3 +2,8 @@
   functions = "functions"
   publish = "public"
   command = "npm run build"
+
+[template.environment]
+  SLACK_CLIENT_TOKEN = "set slack client token"
+  ESA_TOKEN = "set esa.io access token"
+  ESA_TEAM_NAME = "set esa.io team name"
