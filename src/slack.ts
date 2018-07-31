@@ -16,6 +16,7 @@ function getEsaPost(url: string) {
     return null
   }
   const number = matched[1]
+  // TODO: URLからTeamNameを取り出して環境変数の設定を不要にする
   const esa = new Esa(process.env.ESA_TOKEN, process.env.ESA_TEAM_NAME);
   return esa.post(number)
 }
