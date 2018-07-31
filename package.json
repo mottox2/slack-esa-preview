@@ -8,7 +8,8 @@
     "esa-node": "^0.1.2"
   },
   "scripts": {
-    "build": "netlify-lambda build src"
+    "build": "netlify-lambda build src",
+    "serve": "netlify-lambda serve src"
   },
   "devDependencies": {
     "@mottox2/netlify-lambda": "^0.5.0"
