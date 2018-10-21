@@ -40,37 +40,37 @@ exports.handler = async function(event: any, context: any, callback: any) {
     })
   }
   const body = JSON.parse(event.body)
-  if (body.challenge) {
-    callback(null, {
-      statusCode: 200,
-      body: body.challenge
+  if (body.event && body.event.type === 'link_shared') {
+    const slackEvent: LinkSharedEvent = body.event
+    const urls = slackEvent.links.map(link => link.url)
+
+    const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN)
+    let unfurls: any = {}
+    for (let i = 0; i < urls.length; i++) {
+      const url = urls[i]
+      const post = await getEsaPost(url)
+      if (!post) {
+        continue
+      }
+      unfurls[url] = {
+        author_name: post.created_by.name,
+        author_icon: post.created_by.icon,
+        color: '#0a9b94',
+        title: [post.category, post.name].join('/'),
+        text: post.body_md,
+        title_link: post.url
+      }
+    }
+    slack.chat.unfurl({
+      ts: slackEvent.message_ts,
+      channel: slackEvent.channel,
+      unfurls: unfurls
     })
+    console.log(unfurls)
   }
 
-  const slackEvent: LinkSharedEvent = body.event
-  const urls = slackEvent.links.map(link => link.url)
-
-  const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN)
-  let unfurls: any = {}
-  for (let i = 0; i < urls.length; i++) {
-    const url = urls[i]
-    const post = await getEsaPost(url)
-    if (!post) {
-      continue
-    }
-    unfurls[url] = {
-      author_name: post.created_by.name,
-      author_icon: post.created_by.icon,
-      color: '#0a9b94',
-      title: [post.category, post.name].join('/'),
-      text: post.body_md,
-      title_link: post.url
-    }
-  }
-  slack.chat.unfurl({
-    ts: slackEvent.message_ts,
-    channel: slackEvent.channel,
-    unfurls: unfurls
+  callback(null, {
+    statusCode: 200,
+    body: body.challenge
   })
-  console.log(unfurls)
 }
