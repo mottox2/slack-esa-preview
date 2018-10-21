@@ -1,23 +1,22 @@
-import { WebClient } from '@slack/client';
+import { WebClient } from '@slack/client'
 import Esa from 'esa-node'
 
-declare var process : {
+declare var process: {
   env: {
     SLACK_CLIENT_TOKEN: string
     ESA_TOKEN: string
-    ESA_TEAM_NAME: string
   }
 }
 
 function getEsaPost(url: string) {
-  // ["posts/1234", "1234"]
-  const matched = url.match(/posts\/(\d+)/)
-  if (!matched) {
+  // ["https://mottox2.esa.io/posts/1234", "mottox2", "1234"]
+  const matched = url.match(/https?:\/\/(.+).esa.io\/posts\/(\d+)/)
+  if (!matched || !matched[1] || !matched[2]) {
     return null
   }
   const number = matched[1]
-  // TODO: URLからTeamNameを取り出して環境変数の設定を不要にする
-  const esa = new Esa(process.env.ESA_TOKEN, process.env.ESA_TEAM_NAME);
+  const teamName = matched[2]
+  const esa = new Esa(process.env.ESA_TOKEN, teamName)
   return esa.post(number)
 }
 
@@ -32,42 +31,44 @@ interface LinkSharedEvent {
   }>
 }
 
-exports.handler = async function (event: any, context: any, callback: any) {
+exports.handler = async function(event: any, context: any, callback: any) {
   // console.log(JSON.stringify(event.body))
   if (!event.body) {
     callback(null, {
       statusCode: 200,
-      body: "Check your body"
-    });
+      body: 'Check your body'
+    })
   }
   const body = JSON.parse(event.body)
-  const slackEvent : LinkSharedEvent = body.event
+  const slackEvent: LinkSharedEvent = body.event
   const urls = slackEvent.links.map(link => link.url)
 
-  const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN);
+  const slack = new WebClient(process.env.SLACK_CLIENT_TOKEN)
   let unfurls: any = {}
   for (let i = 0; i < urls.length; i++) {
     const url = urls[i]
     const post = await getEsaPost(url)
-    if (!post) { continue }
+    if (!post) {
+      continue
+    }
     unfurls[url] = {
-      "author_name": post.created_by.name,
-      "author_icon": post.created_by.icon,
-      "color": "#0a9b94",
-      "title": [post.category, post.name].join('/'),
-      "text": post.body_md,
-      "title_link": post.url,
+      author_name: post.created_by.name,
+      author_icon: post.created_by.icon,
+      color: '#0a9b94',
+      title: [post.category, post.name].join('/'),
+      text: post.body_md,
+      title_link: post.url
     }
   }
   slack.chat.unfurl({
     ts: slackEvent.message_ts,
     channel: slackEvent.channel,
-    unfurls: unfurls,
+    unfurls: unfurls
   })
   console.log(unfurls)
 
   callback(null, {
     statusCode: 200,
     body: body.challenge
-  });
+  })
 }
