@@ -14,8 +14,8 @@ function getEsaPost(url: string) {
   if (!matched || !matched[1] || !matched[2]) {
     return null
   }
-  const number = matched[1]
-  const teamName = matched[2]
+  const teamName = matched[1]
+  const number = matched[2]
   const esa = new Esa(process.env.ESA_TOKEN, teamName)
   return esa.post(number)
 }
