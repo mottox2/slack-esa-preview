@@ -13,6 +13,9 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.1.0",
-    "netlify-lambda": "https://github.com/netlify/netlify-lambda.git"
+    "bufferutil": "^4.0.0",
+    "electron": "^3.0.10",
+    "netlify-lambda": "https://github.com/netlify/netlify-lambda.git",
+    "utf-8-validate": "^5.0.1"
   }
 }
