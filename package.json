@@ -12,10 +12,10 @@
     "serve": "netlify-lambda serve src"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.1.0",
-    "bufferutil": "^4.0.0",
-    "electron": "^3.0.10",
+    "@babel/preset-typescript": "7.1.0",
+    "bufferutil": "4.0.0",
+    "electron": "3.0.10",
     "netlify-lambda": "https://github.com/netlify/netlify-lambda.git",
-    "utf-8-validate": "^5.0.1"
+    "utf-8-validate": "5.0.1"
   }
 }
