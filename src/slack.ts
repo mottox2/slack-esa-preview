@@ -3,8 +3,7 @@ import Esa from 'esa-node'
 
 import {
   APIGatewayProxyEvent,
-  APIGatewayEventRequestContext,
-  APIGatewayProxyCallback
+  APIGatewayProxyCallback,
   // @ts-ignore
 } from '@types/aws-lambda'
 
@@ -40,7 +39,7 @@ interface LinkSharedEvent {
 
 exports.handler = async (
   event: APIGatewayProxyEvent,
-  context: APIGatewayEventRequestContext,
+  context: any,
   callback: APIGatewayProxyCallback
 ) => {
   // console.log(JSON.stringify(event.body))
