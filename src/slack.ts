@@ -1,6 +1,13 @@
 import { WebClient } from '@slack/client'
 import Esa from 'esa-node'
 
+import {
+  APIGatewayProxyEvent,
+  APIGatewayEventRequestContext,
+  APIGatewayProxyCallback
+  // @ts-ignore
+} from '@types/aws-lambda'
+
 declare var process: {
   env: {
     SLACK_CLIENT_TOKEN: string
@@ -31,13 +38,18 @@ interface LinkSharedEvent {
   }>
 }
 
-exports.handler = async function(event: any, context: any, callback: any) {
+exports.handler = async (
+  event: APIGatewayProxyEvent,
+  context: APIGatewayEventRequestContext,
+  callback: APIGatewayProxyCallback
+) => {
   // console.log(JSON.stringify(event.body))
   if (!event.body) {
     callback(null, {
       statusCode: 200,
       body: 'Check your body'
     })
+    return
   }
   const body = JSON.parse(event.body)
   if (body.event && body.event.type === 'link_shared') {
