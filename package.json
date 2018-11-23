@@ -12,6 +12,7 @@
     "serve": "netlify-lambda serve src"
   },
   "devDependencies": {
-    "@mottox2/netlify-lambda": "0.5.3"
+    "@babel/preset-typescript": "^7.1.0",
+    "netlify-lambda": "https://github.com/netlify/netlify-lambda.git"
   }
 }
