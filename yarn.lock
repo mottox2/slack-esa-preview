@@ -1948,10 +1948,10 @@ es-to-primitive@^1.1.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.1"
 
-esa-node@^0.1.2:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/esa-node/-/esa-node-0.1.7.tgz#766c479718416589c53482f08936ddbf9aaccabe"
-  integrity sha1-dmxHlxhBZYnFNILwiTbdv5qsyr4=
+esa-node@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/esa-node/-/esa-node-0.2.0.tgz#bebefdc6fa81aaf8e9992fdea5c9ae2a394972f9"
+  integrity sha512-HmpiePujzKXiy3wcLQ7cZibiLx/EWNS9KBPvKgwKS/QSxo2vEiPh8W9dBjCEH7JFoReZJN/Z+8vSxW3P9yOShg==
   dependencies:
     axios "^0.18.0"
 
