@@ -2417,9 +2417,9 @@ neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
 
-netlify-lambda@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-1.2.0.tgz#8e9bf370c81e2b4e335442ccf67ff2583df34c48"
+netlify-lambda@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-1.3.1.tgz#563bfafb78dea8617124c7a7a5b941eca9c71d61"
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/plugin-proposal-class-properties" "^7.0.0"
